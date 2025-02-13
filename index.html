@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>JMR's Multiplayer Asteroids</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: black;
+            display: flex;
+            flex-direction: column;  /* Added to stack elements vertically */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        canvas {
+            border: 1px solid #333;
+        }
+        #scoreboard {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .game-header {
+            text-align: center;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin-bottom: 20px;
+        }
+        .game-instructions {
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-header">
+        <h1>Welcome to JMR's Network Asteroids</h1>
+    </div>
+    <div class="game-instructions">
+        Controls: (R)eset Game, (E)xit Game
+    </div>
+    <div id="scoreboard"></div>
+    <canvas id="gameCanvas"></canvas>
+    <script type="module">
+        import { NetworkManager } from './js/networking.js';
+        import Game from './js/asteroids.js';
+
+        // Get the canvas element
+        const canvas = document.getElementById('gameCanvas');
+        
+        // Create game instance
+        const game = new Game(canvas);
+
+        // Set up WebSocket connection
+        // Note: Update this URL to match your server's address
+        const wsUrl = `ws://${window.location.hostname}:8765`;
+        
+        // Create and initialize network manager
+        const networkManager = new NetworkManager(game);
+        networkManager.init(wsUrl);
+
+        // Game loop
+        function gameLoop() {
+            // Update network state
+            networkManager.update();
+            
+            // Update and render game
+            game.update();
+            game.render();
+            
+            // Continue loop
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Start the game loop
+        gameLoop();
+    </script>
+</body>
+</html> 
