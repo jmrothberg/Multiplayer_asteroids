@@ -22,8 +22,10 @@ A real-time multiplayer implementation of the classic Asteroids game using WebSo
 ## Installation
 
 1. Clone the repository:
-   git clone https://github.com/yourusername/multiplayer-asteroids.git
-   cd multiplayer-asteroids
+   ```bash
+   git clone https://github.com/jmrothberg/Multiplayer_asteroids.git
+   cd Multiplayer_asteroids
+   ```
 
 2. Install Python dependencies:
    pip install websockets
@@ -113,12 +115,15 @@ multiplayer-asteroids/
 - Add sound effects
 - Add mobile support
 
+## Author
+
+**Jonathan M. Rothberg** - [@jmrothberg](https://github.com/jmrothberg)
+
 ## License
 
-[Choose an appropriate license]
+MIT License
 
 ## Acknowledgments
 
 - Original Asteroids game by Atari
 - WebSocket protocol documentation
-- [Add any other acknowledgments]
